@@ -1,4 +1,3 @@
-#
 # Copyright 2014 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +11,23 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-add_lunch_combo omni_kagura-userdebug
+# Bootanimation
+TARGET_BOOTANIMATION_SIZE := 1080x608
+
+# Inherit device parts
+$(call inherit-product, device/sony/kagura/aosp_f8331.mk)
+
+# Inherit Omni GSM telephony parts
+PRODUCT_PROPERTY_OVERRIDES += \
+    telephony.lteOnGSMDevice=1
+
+# Override Product Name for OmniROM
+PRODUCT_NAME := omni_kagura
+PRODUCT_MODEL := Xperia XZ
+
+# Assert
+TARGET_OTA_ASSERT_DEVICE := F8331,kagura
+
+# Inherit OmniROM parts
+$(call inherit-product, vendor/omni/config/gsm.mk)
