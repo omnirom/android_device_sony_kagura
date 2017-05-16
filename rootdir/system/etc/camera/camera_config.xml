@@ -2,7 +2,7 @@
   <CameraModuleConfig>
     <CameraId>0</CameraId>
     <SensorName>imx300</SensorName>
-    <ActuatorName>bu64747</ActuatorName>
+    <ActuatorName>bu64747BS4</ActuatorName>
     <FlashName>pmic</FlashName>
     <ChromatixName>imx300_chromatix</ChromatixName>
     <ModesSupported>1</ModesSupported>
@@ -24,13 +24,13 @@
     </LensInfo>
   </CameraModuleConfig>
   <CameraModuleConfig>
-    <CameraId>1</CameraId>
+    <CameraId>2</CameraId>
     <SensorName>imx214</SensorName>
     <ActuatorName>lc898217xc</ActuatorName>
     <ChromatixName>imx214_chromatix</ChromatixName>
     <ModesSupported>1</ModesSupported>
     <Position>FRONT</Position>
-    <MountAngle>360</MountAngle>
+    <MountAngle>90</MountAngle>
     <CSIInfo>
       <CSIDCore>2</CSIDCore>
       <LaneMask>0x1F</LaneMask>
