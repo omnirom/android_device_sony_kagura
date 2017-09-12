@@ -12,24 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include device/sony/tone-common/PlatformConfig.mk
+# Bootanimation
+TARGET_BOOTANIMATION_SIZE := 1080x608
 
-TARGET_BOOTLOADER_BOARD_NAME := F8331
+# Inherit device parts
+$(call inherit-product, device/sony/kagura/aosp_f8331.mk)
 
-WIFI_BUS := PCIE
+# Override Product Name
+PRODUCT_NAME := omni_kagura
+PRODUCT_MODEL := Xperia XZ
 
-# NFC
-NXP_CHIP_TYPE := PN547C2
-NXP_CHIP_FW_TYPE := PN547C2
+# Assert
+TARGET_OTA_ASSERT_DEVICE := none
 
-BOARD_KERNEL_CMDLINE += androidboot.hardware=kagura
+# Inherit rom parts
+$(call inherit-product, vendor/omni/config/gsm.mk)
 
-# Recovery config
-BOARD_SONY_INIT_FLAGS += -DDEV_BLOCK_FOTA_NUM="48"
-BOARD_SONY_INIT_FLAGS += -DDEV_BLOCK_FOTA_MAJOR="259"
-BOARD_SONY_INIT_FLAGS += -DDEV_BLOCK_FOTA_MINOR="16"
-
-#Reserve space for data encryption (23857201152-16384)
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 23857184768
-
-#TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/clearpad/wakeup_gesture"
