@@ -18,21 +18,30 @@ DEVICE_PATH := device/sony/kagura
 DEVICE_PACKAGE_OVERLAYS += \
     $(DEVICE_PATH)/overlay
 
+# Device Specific Permissions
 PRODUCT_COPY_FILES := \
-    $(DEVICE_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
+    frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml \
+    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.gsm.xml
+
+PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/rootdir/system/etc/BCM4359C0.hcd:system/etc/firmware/BCM4359C0.hcd \
     $(DEVICE_PATH)/rootdir/system/etc/wifi/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
-    $(DEVICE_PATH)/rootdir/system/etc/sensors/sensor_def_qcomdev.conf:system/etc/sensors/sensor_def_qcomdev.conf \
-    $(DEVICE_PATH)/rootdir/system/etc/thermanager.xml:system/etc/thermanager.xml \
-    $(DEVICE_PATH)/rootdir/system/etc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-    $(DEVICE_PATH)/rootdir/system/etc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
-    $(DEVICE_PATH)/rootdir/system/etc/mixer_paths.xml:system/etc/mixer_paths.xml
+    $(DEVICE_PATH)/rootdir/system/etc/sensors/sensor_def_qcomdev.conf:system/etc/sensors/sensor_def_qcomdev.conf
+
+# Thermal Configuration
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/rootdir/vendor/etc/thermanager.xml:$(TARGET_COPY_OUT_VENDOR)/etc/thermanager.xml
 
 # Camera Configuration
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/rootdir/system/etc/camera/camera_config.xml:system/etc/camera/camera_config.xml \
     $(DEVICE_PATH)/rootdir/system/etc/camera/imx214_chromatix.xml:system/etc/camera/imx214_chromatix.xml \
     $(DEVICE_PATH)/rootdir/system/etc/camera/imx300_chromatix.xml:system/etc/camera/imx300_chromatix.xml
+
+# Audio configuration
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/rootdir/vendor/etc/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf \
+    $(DEVICE_PATH)/rootdir/vendor/etc/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml
 
 # Audio calibration
 PRODUCT_COPY_FILES += \
@@ -44,13 +53,9 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/rootdir/system/etc/acdbdata/Headset_cal.acdb:system/etc/acdbdata/Headset_cal.acdb \
     $(DEVICE_PATH)/rootdir/system/etc/acdbdata/Speaker_cal.acdb:system/etc/acdbdata/Speaker_cal.acdb
 
-# Device Specific Permissions
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml \
-    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml \
-    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml
+    $(DEVICE_PATH)/rootdir/vendor/etc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm.conf \
+    $(DEVICE_PATH)/rootdir/vendor/etc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
 
 # Device Init
 PRODUCT_PACKAGES += \
@@ -91,7 +96,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 $(call inherit-product, device/sony/tone-common/platform.mk)
 
 # copy wlan firmware
-$(call inherit-product-if-exists, vendor/sony/broadcom/wlan/bcmdhd/firmware/bcm4359/device-bcm.mk)
+$(call inherit-product-if-exists, vendor/sony/broadcom/wlan/bcmdhd/firmware/bcm4359/device-bcm-vendor.mk)
 
 # copy NFC firmware
 $(call inherit-product-if-exists, vendor/sony/nxp/nxp-vendor.mk)
