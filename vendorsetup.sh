@@ -14,4 +14,6 @@
 # limitations under the License.
 #
 
+add_lunch_combo omni_kagura-user
 add_lunch_combo omni_kagura-userdebug
+add_lunch_combo omni_kagura-eng
